@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <style>
+        /* Fundo roxo claro com efeito glitter */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e6ccff, #f3e6ff);
+            background-image:
+                radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.6) 0%, transparent 20%),
+                radial-gradient(circle at 90% 90%, rgba(255, 255, 255, 0.4) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.3) 0%, transparent 30%);
+            background-repeat: repeat;
+            background-size: 300px 300px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Caixa principal */
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            color: #4b0082;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #4b0082;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #a64ca6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #8b3e8b;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #4b0082;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Calculadora de IMC</h1>
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" placeholder="Ex: 70">
+        <label for="altura">Altura (m):</label>
+        <input type="number" id="altura" step="0.01" placeholder="Ex: 1.75">
+        <button onclick="calcularIMC()">Calcular IMC</button>
+        <div class="resultado" id="resultado"></div>
+    </div>
+
+    <script>
+        function calcularIMC() {
+            const peso = parseFloat(document.getElementById('peso').value);
+            const altura = parseFloat(document.getElementById('altura').value);
+            if (!peso || !altura) {
+                document.getElementById('resultado').innerText = 'Por favor, insira peso e altura válidos.';
+                return;
+            }
+            const imc = peso / (altura * altura);
+            let classificacao = '';
+            if (imc < 18.5) classificacao = 'Abaixo do peso';
+            else if (imc < 24.9) classificacao = 'Peso normal';
+            else if (imc < 29.9) classificacao = 'Sobrepeso';
+            else classificacao = 'Obesidade';
+            document.getElementById('resultado').innerText = `Seu IMC é ${imc.toFixed(1)} (${classificacao})`;
+        }
+    </script>
+</body>
+
+</html>
